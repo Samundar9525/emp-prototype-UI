@@ -69,40 +69,27 @@ export class EmployeeDetailComponent {
     });
   }
 
- createHikeChart(empNo:any, data:any){
-  this.hikesData = {
-    id: empNo,
-    dataSource: {
-      values: [{
-        x: data.map((res:any) => res.from_date),
-        y: data.map((res:any) => res.hike_percentage),
-        type: 'bar',
-        name: 'Salary Hike %',
-        hovertemplate: '%{y:.1f}% Hike<br>Salary: %{customdata:,.0f}<extra></extra>',
-        customdata: data.map((res:any) => res.current_salary)
-      }],
-      layout: {
-        height: 350,
-        autosize: true,
-        title: 'Employee Yearly Salary Hikes',
-        yaxis: {
-          title: 'Hike Percentage (%)',
-          zeroline: true
+  createHikeChart(empNo:any,data:any){
+    this.hikesData = {
+      id: empNo,
+      dataSource:{
+        values:[{
+          x: data.map((res:any)=>{return res.from_date}),
+          y: data.map((res:any)=>{return res.hike_percentage}),
+          type: 'bar'
+        }],
+        layout:{
+          height:350,
+          autosize:true,
+          title: 'Employee Yearly Hikes Details',
+          xaxis: {
+            range: ['1989-07-01', '2005-12-31'],
+            type: 'date'
+          },
         },
-        xaxis: {
-          title: 'Date',
-          type: 'date'
-        },
-        showlegend: false,
-        margin: { t: 50, l: 70, r: 40, b: 50 }
-      },
-      config: {
-        responsive: true,
-        displayModeBar: false
+        config: {responsive: true}
       }
     }
-  };
-  console.log('Chart data:', this.hikesData); // Debug log
-}
+  }
 
 }

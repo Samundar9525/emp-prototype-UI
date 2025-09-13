@@ -21,7 +21,7 @@ export class LoginComponent {
     public dialogRef: MatDialogRef<LoginComponent>
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -30,14 +30,9 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      this.service.userLogin(this.loginForm.value).subscribe(res=>{
-        if (res){
-          this.dialogRef.close();
-          this.service.userLogged.next(res);
-        }
-      })
-    }
+      this.service.login(this.loginForm.value.email,this.loginForm.value.password)
   }
+}
 
   onClose(): void {
     this.dialogRef.close();
